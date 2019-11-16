@@ -12,7 +12,7 @@ import {
   NerdGraphQuery,
   HeadingText,
   BlockText,
-  LineChart
+  BarChart
 } from 'nr1';
 import { mapData, entityQuery, getMarkerColor } from './util';
 import DetailsPanel from './details-panel';
@@ -104,7 +104,7 @@ export default class PageViewMap extends React.Component {
                               Grid.SPACING_TYPE.NONE
                             ]}
                           >
-                            <GridItem columnSpan={detailsOpen ? 8 : 12}>
+                            <GridItem columnSpan={detailsOpen ? 7 : 12}>
                               <Map
                                 className="containerMap"
                                 style={{ height: '99vh' }}
@@ -125,7 +125,7 @@ export default class PageViewMap extends React.Component {
                                     <CircleMarker
                                       key={`circle-${i}`}
                                       center={center}
-                                      color={getMarkerColor(pt.y, 20000)}
+                                      color={getMarkerColor(pt.y, 200)}
                                       radius={Math.log(pt.y) * 3}
                                       onClick={() => {
                                         this.togglePageViewDetails(pt, center);
@@ -136,7 +136,7 @@ export default class PageViewMap extends React.Component {
                               </Map>
                             </GridItem>
                             {openedFacet && (
-                              <GridItem columnSpan={4}>
+                              <GridItem columnSpan={5}>
                                 <DetailsPanel
                                   appId={appId}
                                   accountId={accountId}
@@ -148,6 +148,13 @@ export default class PageViewMap extends React.Component {
                                 />
                               </GridItem>
                             )}
+                            <GridItem columnSpan={12}>
+                              <BarChart
+                                accountId={1966971}
+                                query="SELECT sum(amount), sum(employees), count(*)  FROM StoreUpdate SINCE 2 minutes ago"
+                                fullWidth
+                              />
+                            </GridItem>
                           </Grid>
                         );
                       }}

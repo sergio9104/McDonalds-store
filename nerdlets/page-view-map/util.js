@@ -37,9 +37,9 @@ export const mapData = (accountId, appId, launcherUrlState) => {
  * @param {number} apdexTarget - configured value of the apdex target for a given entity
  */
 export const getMarkerColor = (measure, apdexTarget) => {
-  if (measure <= apdexTarget) {
+  if (measure >= apdexTarget) {
     return '#11A600';
-  } else if (measure >= apdexTarget && measure <= apdexTarget * 4) {
+  } else if (measure <= apdexTarget && measure >= apdexTarget * 4) {
     return '#FFD966';
   } else {
     return '#BF0016';

@@ -87,3 +87,12 @@ h1 {
   position: absolute;
   bottom: 13px;
 }
+
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  height: 78vh !important;
+}
+
+.AABCAC-wnd-Stack--verticalTop.AABCAC-wnd-Stack--directionVertical {
+  height: 78vh !important;
+  overflow: auto !important;
+}

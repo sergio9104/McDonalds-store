@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import React from 'react';
-import { Stack, StackItem, LineChart, ChartGroup, Button } from 'nr1';
+import { Stack, StackItem, LineChart, ChartGroup, Button, Toast } from 'nr1';
 import PropTypes from 'prop-types';
 import numeral from 'numeral';
 
@@ -16,6 +16,20 @@ export default class DetailsPanel extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  onClick = (graphic, name) => {
+    Toast.showToast({
+      title: 'Alert',
+      description: `Please look the ${graphic}'s graphic of ${name}`,
+      actions: [
+        {
+          label: 'Send Mail',
+          onClick: () => console.log('Hello World!')
+        }
+      ],
+      type: Toast.TYPE.NORMAL
+    });
+  };
 
   render() {
     const { accountId, openedFacet } = this.props;
@@ -52,28 +66,28 @@ export default class DetailsPanel extends React.Component {
               query={`SELECT filter(average(amount), where id = ${openedFacet.facet[0]}) as 'Global', average(amount) as 'Local' FROM StoreUpdate  SINCE 1 day ago TIMESERIES`}
             />
             <Button
-              onClick={() => alert('Hello World!')}
+              onClick={() => this.onClick('sells', openedFacet.facet[1])}
               type={Button.TYPE.PRIMARY}
               iconType={Button.ICON_TYPE.DOCUMENTS__DOCUMENTS__EMAIL}
               className="alert-button"
             >
-              Send Alert
+              Send Email
             </Button>
           </StackItem>
           <StackItem className="chart-stack-item">
-            <h5 className="chart-header">Hamburger Number</h5>
+            <h5 className="chart-header">Earnings</h5>
             <LineChart
               className="chartSection"
               accountId={accountId}
-              query={`SELECT filter(average(hamburguer), where id = ${openedFacet.facet[0]}) as 'Global', average(hamburguer) as 'Local' FROM StoreUpdate  SINCE 1 day ago TIMESERIES`}
+              query={`SELECT filter(average(amount)*0.3, where id = ${openedFacet.facet[0]}) as 'Global', average(amount)*0.3 as 'Local' FROM StoreUpdate  SINCE 1 day ago TIMESERIES`}
             />
             <Button
-              onClick={() => alert('Hello World!')}
+              onClick={() => this.onClick('earnings', openedFacet.facet[1])}
               type={Button.TYPE.PRIMARY}
               iconType={Button.ICON_TYPE.DOCUMENTS__DOCUMENTS__EMAIL}
               className="alert-button"
             >
-              Send Alert
+              Send Email
             </Button>
           </StackItem>
           <StackItem className="chart-stack-item">
@@ -81,15 +95,15 @@ export default class DetailsPanel extends React.Component {
             <LineChart
               className="chartSection"
               accountId={accountId}
-              query={`SELECT filter(average(combo), where id = ${openedFacet.facet[0]}) as 'Global', average(combo) as 'Local' FROM StoreUpdate  SINCE 1 day ago TIMESERIES`}
+              query={`SELECT average(bigMac) as 'BigMac', average(chips) as Chips, average(mcMuffin) as 'McMuffin', average(mcNuggets) as 'McNutgets', average(milkshake) as 'MilkShake' FROM StoreSales WHERE storeID=${openedFacet.facet[0]} SINCE 1 hour ago TIMESERIES`}
             />
             <Button
-              onClick={() => alert('Hello World!')}
+              onClick={() => this.onClick('products', openedFacet.facet[1])}
               type={Button.TYPE.PRIMARY}
               iconType={Button.ICON_TYPE.DOCUMENTS__DOCUMENTS__EMAIL}
               className="alert-button"
             >
-              Send Alert
+              Send Email
             </Button>
           </StackItem>
         </Stack>
