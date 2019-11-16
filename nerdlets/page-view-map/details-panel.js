@@ -63,7 +63,7 @@ export default class DetailsPanel extends React.Component {
             <LineChart
               className="chartSection"
               accountId={accountId}
-              query={`SELECT filter(average(amount), where id = ${openedFacet.facet[0]}) as 'Global', average(amount) as 'Local' FROM StoreUpdate  SINCE 1 day ago TIMESERIES`}
+              query={`SELECT filter(average(amount), where id = ${openedFacet.facet[0]}) as 'Global', average(amount) as 'Local' FROM StoreUpdate  SINCE 6 hour ago TIMESERIES`}
             />
             <Button
               onClick={() => this.onClick('sells', openedFacet.facet[1])}
@@ -79,7 +79,7 @@ export default class DetailsPanel extends React.Component {
             <LineChart
               className="chartSection"
               accountId={accountId}
-              query={`SELECT filter(average(amount)*0.3, where id = ${openedFacet.facet[0]}) as 'Global', average(amount)*0.3 as 'Local' FROM StoreUpdate  SINCE 1 day ago TIMESERIES`}
+              query={`SELECT filter(average(amount)*0.3, where id = ${openedFacet.facet[0]}) as 'Global', average(amount)*0.3 as 'Local' FROM StoreUpdate  SINCE 6 hour ago TIMESERIES`}
             />
             <Button
               onClick={() => this.onClick('earnings', openedFacet.facet[1])}
