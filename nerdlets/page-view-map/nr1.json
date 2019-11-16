@@ -1,0 +1,8 @@
+{
+    "schemaType": "NERDLET",
+    "id": "sergio-nerdlet",
+    "description": "Web page with information in real time of mcdonalds bussiness",
+    "displayName": "McDonalds",
+    "entities": [{"domain": "BROWSER", "type": "APPLICATION"}],
+    "actionCategory": "monitor"
+}
